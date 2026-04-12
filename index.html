@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>💖 Love Page 💖</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', cursive;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb);
+    text-align: center;
+    overflow: hidden;
+    color: white;
+}
+
+.page { display: none; padding: 40px; }
+.active { display: block; }
+
+h1 { font-size: 30px; }
+
+button, .arrow {
+    padding: 12px 20px;
+    margin: 10px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+}
+
+input {
+    padding: 10px;
+    width: 70%;
+    border-radius: 10px;
+    border: none;
+}
+
+.cupid { font-size: 80px; cursor: pointer; }
+.cat { width: 200px; }
+
+.flying {
+    position: absolute;
+    font-size: 30px;
+    animation: fly 6s linear infinite;
+}
+
+@keyframes fly {
+    from { transform: translateY(100vh); }
+    to { transform: translateY(-10vh); }
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- Nhạc nền -->
+<audio autoplay loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mp3">
+</audio>
+
+<!-- PAGE 1 -->
+<div class="page active" id="p1">
+    <h1>💖 Chào người em yêu ạ! 💖</h1>
+    <div class="cupid" onclick="next(2)">🏹💘</div>
+    <p>Nhấn vào đây để tâm sự nhá Bae iu ơi!</p>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="p2">
+    <h1>Anh có thương em không?</h1>
+    <button onclick="next(3)">Anh có</button>
+    <button onclick="next(3)">Nào dám trả lời không</button>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page" id="p3">
+    <img class="cat" src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif">
+    <h2>Em cũng thương anh lắm 💕</h2>
+    <div class="arrow" onclick="next(4)">👉 Tiếp tục</div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page" id="p4">
+    <h1>Dạo này anh thấy thế nào?</h1>
+    <input id="q1">
+    <div class="arrow" onclick="next(5)">👉 Anh bấm vào đây nè!</div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page" id="p5">
+    <h1>Hãy trả lời các câu sau đây~~</h1>
+    <div class="arrow" onclick="next(6)">👉 Anh bấm vào đây tiếp nhé!</div>
+    <img class="cat" src="https://media.giphy.com/media/mlvseq9yvZhba/giphy.gif">
+</div>
+
+<!-- PAGE 6 -->
+<div class="page" id="p6">
+    <h1>Hiện tại anh đang thích ăn món gì nhất?</h1>
+    <input id="q2">
+    <div class="arrow" onclick="next(7)">👉 Tiếp tục nà!</div>
+</div>
+
+<!-- PAGE 7 -->
+<div class="page" id="p7">
+    <h1>Bây giờ anh đang suy nghĩ và muốn làm gì nhất?</h1>
+    <input id="q3">
+    <div class="arrow" onclick="next(8)">👉 Nữa nhé!</div>
+</div>
+
+<!-- PAGE 8 -->
+<div class="page" id="p8">
+    <h1>Có món quà nào mà anh thích được tặng nhất?</h1>
+    <input id="q4">
+    <div class="arrow" onclick="next(9)">👉 Còn nữaaaa!</div>
+</div>
+
+<!-- PAGE 9 -->
+<div class="page" id="p9">
+    <h1>Điều gì ở em khiến anh còn phiền lòng nhất?</h1>
+    <input id="q5">
+    <div class="arrow" onclick="finish()">👉 Anh bấm vào đây nhé!</div>
+</div>
+
+<!-- PAGE 10 -->
+<div class="page" id="p10">
+    <h1>
+    Em đã ghi nhận câu trả lời 💖<br><br>
+    Em sẽ cố gắng tốt hơn!<br><br>
+    I love you ❤️
+    </h1>
+</div>
+
+<script>
+const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSdYuCVEM7QCvCqjvtUc6SuVrNW1flerqN3PaKQ4poPHXj2uIA/formResponse";
+
+function next(page) {
+    document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+    document.getElementById("p"+page).classList.add("active");
+}
+
+// Cupid bay
+setInterval(() => {
+    let c = document.createElement("div");
+    c.className = "flying";
+    c.innerHTML = "💘";
+    c.style.left = Math.random()*100 + "vw";
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),6000);
+},500);
+
+// Gửi dữ liệu
+function finish() {
+    let data = new URLSearchParams();
+    data.append("entry.137169317", document.getElementById("q1").value);
+    data.append("entry.454111835", document.getElementById("q2").value);
+    data.append("entry.1872124055", document.getElementById("q3").value);
+    data.append("entry.669638336", document.getElementById("q4").value);
+    data.append("entry.559059606", document.getElementById("q5").value);
+
+    fetch(FORM_URL, {
+        method: "POST",
+        mode: "no-cors",
+        body: data
+    });
+
+    next(10);
+}
+</script>
+
+</body>
+</html>
+    
