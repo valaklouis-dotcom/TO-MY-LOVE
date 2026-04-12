@@ -1,200 +1,215 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Quicksand:wght@400;600&family=Pacifico&display=swap" rel="stylesheet">
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>💖 Love Page 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Quicksand:wght@400;600&family=Pacifico&display=swap" rel="stylesheet">
 
 <style>
 body {
-    margin: 0;
-    /* Font toàn bộ web */
-body {
+  margin: 0;
   font-family: 'Quicksand', sans-serif;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb);
+  text-align: center;
+  color: white;
+  overflow: hidden;
 }
 
-/* Tiêu đề chính */
+/* layout */
+.page {
+  display: none;
+  padding: 20px;
+  max-width: 600px;
+  margin: auto;
+}
+.active { display: block; }
+
+/* title */
 h1 {
   font-family: 'Great Vibes', cursive;
-  font-size: 52px;
-  color: #fff;
-  text-shadow: 2px 2px 12px rgba(255, 105, 180, 0.7);
+  font-size: 6vw;
+  text-shadow: 0 0 20px pink;
 }
 
-/* Nội dung */
-p, label {
-  font-family: 'Quicksand', sans-serif;
+/* text */
+p {
   font-size: 18px;
-  color: #fff;
 }
 
-/* Nút */
+/* button */
 button {
   font-family: 'Pacifico', cursive;
   background: #ff69b4;
+  border: none;
   color: white;
+  padding: 12px 20px;
   border-radius: 20px;
-  padding: 10px 20px;
-}
-    background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb);
-    text-align: center;
-    overflow: hidden;
-    color: white;
+  margin: 10px;
+  cursor: pointer;
 }
 
-.page { display: none; padding: 40px; }
-.active { display: block; }
-
-h1 { font-size: 30px; }
-
-button, .arrow {
-    padding: 12px 20px;
-    margin: 10px;
-    border-radius: 20px;
-    border: none;
-    cursor: pointer;
-}
-
+/* input */
 input {
-    padding: 10px;
-    width: 70%;
-    border-radius: 10px;
-    border: none;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  width: 80%;
 }
 
-.cupid { font-size: 80px; cursor: pointer; }
-.cat { width: 200px; }
+/* cat gif */
+.cat {
+  width: 150px;
+  margin-top: 20px;
+}
 
-.flying {
-    position: absolute;
-    font-size: 30px;
-    animation: fly 6s linear infinite;
+/* cupid */
+.cupid {
+  position: fixed;
+  width: 60px;
+  animation: fly 10s linear infinite;
 }
 
 @keyframes fly {
-    from { transform: translateY(100vh); }
-    to { transform: translateY(-10vh); }
+  from { transform: translateX(-100px) translateY(0); }
+  to { transform: translateX(110vw) translateY(100px); }
+}
+
+/* hearts */
+.heart {
+  position: fixed;
+  color: pink;
+  animation: fall 5s linear infinite;
+}
+
+@keyframes fall {
+  from { transform: translateY(-10vh); }
+  to { transform: translateY(110vh); }
+}
+
+/* mobile */
+@media (max-width: 600px) {
+  h1 { font-size: 32px; }
 }
 </style>
-
 </head>
 
 <body>
 
-<!-- Nhạc nền -->
+<!-- music -->
 <audio autoplay loop>
-    <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mp3">
+  <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mp3">
 </audio>
+
+<!-- cupid -->
+<img class="cupid" src="https://cdn-icons-png.flaticon.com/512/833/833472.png">
+
+<!-- hearts -->
+<script>
+setInterval(()=>{
+  let heart=document.createElement("div");
+  heart.className="heart";
+  heart.innerHTML="💖";
+  heart.style.left=Math.random()*100+"vw";
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),5000);
+},500);
+</script>
 
 <!-- PAGE 1 -->
 <div class="page active" id="p1">
-    <h1>💖 Chào người em yêu ạ! 💖</h1>
-    <div class="cupid" onclick="next(2)">🏹💘</div>
-    <p>Nhấn vào đây để tâm sự nhá Bae iu ơi!</p>
+  <h1>💖 Chào người em yêu ạ! 💖</h1>
+  <p>Nhấn vào đây để tâm sự nhá Bae iu ơi!</p>
+  <img class="cat" src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif">
+  <br>
+  <button onclick="next('p2')">💘 Bắt đầu 💘</button>
 </div>
 
 <!-- PAGE 2 -->
 <div class="page" id="p2">
-    <h1>Anh có thương em không?</h1>
-    <button onclick="next(3)">Anh có</button>
-    <button onclick="next(3)">Nào dám trả lời không</button>
+  <h1>Anh có thương em không?</h1>
+  <button onclick="next('p3')">Anh có 💖</button>
+  <button onclick="next('p3')">Nào dám trả lời không 😏</button>
 </div>
 
 <!-- PAGE 3 -->
 <div class="page" id="p3">
-    <img class="cat" src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif">
-    <h2>Em cũng thương anh lắm 💕</h2>
-    <div class="arrow" onclick="next(4)">👉 Tiếp tục</div>
+  <img class="cat" src="https://media.giphy.com/media/mlvseq9yvZhba/giphy.gif">
+  <h1>Em cũng thương anh lắm 💖</h1>
+  <button onclick="next('p4')">Tiếp tục ➡️</button>
 </div>
 
 <!-- PAGE 4 -->
 <div class="page" id="p4">
-    <h1>Dạo này anh thấy thế nào?</h1>
-    <input id="q1">
-    <div class="arrow" onclick="next(5)">👉 Anh bấm vào đây nè!</div>
+  <h1>Dạo này anh thấy thế nào ạ?</h1>
+  <input id="q1">
+  <br><button onclick="saveAndNext('q1','p5')">➡️</button>
 </div>
 
 <!-- PAGE 5 -->
 <div class="page" id="p5">
-    <h1>Hãy trả lời các câu sau đây~~</h1>
-    <div class="arrow" onclick="next(6)">👉 Anh bấm vào đây tiếp nhé!</div>
-    <img class="cat" src="https://media.giphy.com/media/mlvseq9yvZhba/giphy.gif">
+  <h1>Món ăn nào mà anh thích ăn nhất?</h1>
+  <input id="q2">
+  <br><button onclick="saveAndNext('q2','p6')">➡️</button>
 </div>
 
 <!-- PAGE 6 -->
 <div class="page" id="p6">
-    <h1>Hiện tại anh đang thích ăn món gì nhất?</h1>
-    <input id="q2">
-    <div class="arrow" onclick="next(7)">👉 Tiếp tục nà!</div>
+  <h1>Bây giờ anh muốn làm gì nhất?</h1>
+  <input id="q3">
+  <br><button onclick="saveAndNext('q3','p7')">➡️</button>
 </div>
 
 <!-- PAGE 7 -->
 <div class="page" id="p7">
-    <h1>Bây giờ anh đang suy nghĩ và muốn làm gì nhất?</h1>
-    <input id="q3">
-    <div class="arrow" onclick="next(8)">👉 Nữa nhé!</div>
+  <h1>Có món quà nào mà anh thích được tặng nhất hong ạ?</h1>
+  <input id="q4">
+  <br><button onclick="saveAndNext('q4','p8')">➡️</button>
 </div>
 
 <!-- PAGE 8 -->
 <div class="page" id="p8">
-    <h1>Có món quà nào mà anh thích được tặng nhất?</h1>
-    <input id="q4">
-    <div class="arrow" onclick="next(9)">👉 Còn nữaaaa!</div>
+  <h1>Điều gì ở em khiến anh còn phiền lòng nhất?</h1>
+  <input id="q5">
+  <br><button onclick="sendAllData(); next('p9')">💌 Gửi nè</button>
 </div>
 
 <!-- PAGE 9 -->
 <div class="page" id="p9">
-    <h1>Điều gì ở em khiến anh còn phiền lòng nhất?</h1>
-    <input id="q5">
-    <div class="arrow" onclick="finish()">👉 Anh bấm vào đây nhé!</div>
-</div>
+  <h1>💖 Em đã ghi nhận rồi 💖</h1>
+  <p>I love you 💘</p>
+  <img class="cat" src="https://media.giphy.com/media/ICOgUNjpvO0PC/giphy.gif">
 
-<!-- PAGE 10 -->
-<div class="page" id="p10">
-    <h1>
-    Em đã ghi nhận câu trả lời 💖<br><br>
-    Em sẽ cố gắng tốt hơn!<br><br>
-    I love you ❤️
-    </h1>
+  <br><br>
+  <button onclick="sendAllData()">💌 Gửi câu trả lời</button>
 </div>
 
 <script>
-const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSdYuCVEM7QCvCqjvtUc6SuVrNW1flerqN3PaKQ4poPHXj2uIA/formResponse";
-
-function next(page) {
-    document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
-    document.getElementById("p"+page).classList.add("active");
+function next(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
 }
 
-// Cupid bay
-setInterval(() => {
-    let c = document.createElement("div");
-    c.className = "flying";
-    c.innerHTML = "💘";
-    c.style.left = Math.random()*100 + "vw";
-    document.body.appendChild(c);
-    setTimeout(()=>c.remove(),6000);
-},500);
+const GOOGLE_FORM_ACTION="https://docs.google.com/forms/d/e/1FAIpQLSdYuCVEM7QCvCqjvtUc6SuVrNW1flerqN3PaKQ4poPHXj2uIA/formResponse";
 
-// Gửi dữ liệu
-function finish() {
-    let data = new URLSearchParams();
-    data.append("entry.137169317", document.getElementById("q1").value);
-    data.append("entry.454111835", document.getElementById("q2").value);
-    data.append("entry.1872124055", document.getElementById("q3").value);
-    data.append("entry.669638336", document.getElementById("q4").value);
-    data.append("entry.559059606", document.getElementById("q5").value);
+function sendAllData() {
+  let data = new FormData();
 
-    fetch(FORM_URL, {
-        method: "POST",
-        mode: "no-cors",
-        body: data
-    });
+  data.append("entry.137169317", document.getElementById("q1").value);
+  data.append("entry.454111835", document.getElementById("q2").value);
+  data.append("entry.1872124055", document.getElementById("q3").value);
+  data.append("entry.669638336", document.getElementById("q4").value);
+  data.append("entry.559059606", document.getElementById("q5").value);
 
-    next(10);
+  fetch(GOOGLE_FORM_ACTION, {
+    method: "POST",
+    mode: "no-cors",
+    body: data
+  });
 }
 </script>
 
 </body>
 </html>
-    
