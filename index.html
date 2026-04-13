@@ -203,110 +203,54 @@ setInterval(()=>{
 </div>
 
 <script>
-function catTalk(text){
-  let currentBubble = null;
-
-function catTalk(text){
-  if(currentBubble){
-    currentBubble.remove();
-  }
-
-  let bubble = document.createElement("div");
-  bubble.innerText = text;
-
-  bubble.style.position = "fixed";
-  bubble.style.bottom = "120px";
-  bubble.style.left = "50%";
-  bubble.style.transform = "translateX(-50%) scale(0.8)";
-  bubble.style.background = "white";
-  bubble.style.color = "#ff4da6";
-  bubble.style.padding = "12px 18px";
-  bubble.style.borderRadius = "25px";
-  bubble.style.fontSize = "16px";
-  bubble.style.boxShadow = "0 0 15px pink";
-  bubble.style.zIndex = "9999";
-  bubble.style.opacity = "0";
-
-  document.body.appendChild(bubble);
-  currentBubble = bubble;
-
-  // animation mượt
-  setTimeout(()=>{
-    bubble.style.transition="0.3s";
-    bubble.style.opacity="1";
-    bubble.style.transform="translateX(-50%) scale(1)";
-  },10);
-
-  setTimeout(()=>{
-    bubble.style.opacity="0";
-    setTimeout(()=>{
-      if(bubble === currentBubble){
-        bubble.remove();
-        currentBubble=null;
-      }
-    },300);
-  },2000);
-}
+// ===== NEXT PAGE =====
 function next(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
+  let page = document.getElementById(id);
+  if(page) page.classList.add('active');
 
-  if(id==="p2") catTalk("Anh phải trả lời thật đó nha 😏");
-  if(id==="p3") catTalk("Hehe biết mà 😚");
-  if(id==="p4") catTalk("Viết cho dễ thương nha 💖");
-  if(id==="p5") catTalk("Ăn gì ngon nhớ chia nha 😆");
-  if(id==="p6") catTalk("Đang nghĩ gì đó 😏");
-  if(id==="p7") catTalk("Quà gì đây ta 🎁");
-  if(id==="p8") catTalk("Câu này quan trọng đó 😢");
-  if(id==="p9") catTalk("Yêu anh nhiều lắm 💘");
+  setTimeout(()=>{
+    if(id==="p2") catTalk("Anh phải trả lời thật đó nha 😏");
+    if(id==="p3") catTalk("Hehe biết mà 😚");
+    if(id==="p4") catTalk("Viết dễ thương nha 💖");
+    if(id==="p5") catTalk("Ăn gì ngon nhớ chia nha 😆");
+    if(id==="p6") catTalk("Đang nghĩ gì đó 😏");
+    if(id==="p7") catTalk("Quà gì đây ta 🎁");
+    if(id==="p8") catTalk("Câu này quan trọng đó 😢");
+    if(id==="p9") catTalk("Yêu anh nhiều lắm 💘");
+  },100);
 }
 
-const GOOGLE_FORM_ACTION="https://docs.google.com/forms/d/e/1FAIpQLSdYuCVEM7QCvCqjvtUc6SuVrNW1flerqN3PaKQ4poPHXj2uIA/formResponse";
+// ===== MÈO NÓI =====
+let currentBubble=null;
+function catTalk(text){
+  if(currentBubble) currentBubble.remove();
 
-function sendAllData() {
-  let data = new FormData();
+  let bubble=document.createElement("div");
+  bubble.innerText=text;
 
-  data.append("entry.137169317", document.getElementById("q1").value);
-  data.append("entry.454111835", document.getElementById("q2").value);
-  data.append("entry.1872124055", document.getElementById("q3").value);
-  data.append("entry.669638336", document.getElementById("q4").value);
-  data.append("entry.559059606", document.getElementById("q5").value);
+  bubble.style.position="fixed";
+  bubble.style.bottom="120px";
+  bubble.style.left="50%";
+  bubble.style.transform="translateX(-50%)";
+  bubble.style.background="white";
+  bubble.style.color="#ff4da6";
+  bubble.style.padding="10px 15px";
+  bubble.style.borderRadius="20px";
+  bubble.style.boxShadow="0 0 10px pink";
 
-  fetch(GOOGLE_FORM_ACTION, {
-    method: "POST",
-    mode: "no-cors",
-    body: data
-  });
-}
-function createCupid(){
-  let cupid=document.createElement("img");
-  cupid.src="https://cdn-icons-png.flaticon.com/512/833/833472.png";
+  document.body.appendChild(bubble);
+  currentBubble=bubble;
 
-  cupid.style.position="fixed";
-  cupid.style.width=(40+Math.random()*30)+"px";
-  cupid.style.top=Math.random()*80+"vh";
-  cupid.style.left="-60px";
-  cupid.style.zIndex="999";
-
-  document.body.appendChild(cupid);
-
-  let speed=3+Math.random()*4;
-
-  let move=setInterval(()=>{
-    let left=parseFloat(cupid.style.left);
-    cupid.style.left=(left+speed)+"px";
-
-    // bắn tim khi bay
-    if(Math.random()<0.1){
-      shootHeart(left, parseFloat(cupid.style.top));
+  setTimeout(()=>{
+    if(bubble===currentBubble){
+      bubble.remove();
+      currentBubble=null;
     }
-
-    if(left>window.innerWidth){
-      cupid.remove();
-      clearInterval(move);
-    }
-  },30);
+  },2000);
 }
+
+// ===== BẮN TIM =====
 function shootHeart(x,y){
   let heart=document.createElement("div");
   heart.innerHTML=["💘","💖","💕"][Math.floor(Math.random()*3)];
@@ -314,8 +258,7 @@ function shootHeart(x,y){
   heart.style.position="fixed";
   heart.style.left=x+"px";
   heart.style.top=y+"px";
-  heart.style.fontSize=(15+Math.random()*15)+"px";
-  heart.style.zIndex="999";
+  heart.style.fontSize="20px";
 
   document.body.appendChild(heart);
 
@@ -329,8 +272,61 @@ function shootHeart(x,y){
     }
   },30);
 }
-// gọi liên tục
-setInterval(createCupid,1200);
+
+// ===== CUPID =====
+function createCupid(){
+  let cupid=document.createElement("img");
+  cupid.src="https://cdn-icons-png.flaticon.com/512/833/833472.png";
+
+  cupid.style.position="fixed";
+  cupid.style.width="50px";
+  cupid.style.top=Math.random()*80+"vh";
+  cupid.style.left="-60px";
+
+  document.body.appendChild(cupid);
+
+  let speed=3+Math.random()*4;
+
+  let move=setInterval(()=>{
+    let left=parseFloat(cupid.style.left);
+    cupid.style.left=(left+speed)+"px";
+
+    if(Math.random()<0.1){
+      shootHeart(left, parseFloat(cupid.style.top));
+    }
+
+    if(left>window.innerWidth){
+      cupid.remove();
+      clearInterval(move);
+    }
+  },30);
+}
+
+setInterval(createCupid,1000);
+
+// ===== GOOGLE FORM =====
+const GOOGLE_FORM_ACTION="https://docs.google.com/forms/d/e/1FAIpQLSdYuCVEM7QCvCqjvtUc6SuVrNW1flerqN3PaKQ4poPHXj2uIA/formResponse";
+
+function sendAllData(){
+  let data=new FormData();
+
+  data.append("entry.137169317", document.getElementById("q1").value);
+  data.append("entry.454111835", document.getElementById("q2").value);
+  data.append("entry.1872124055", document.getElementById("q3").value);
+  data.append("entry.669638336", document.getElementById("q4").value);
+  data.append("entry.559059606", document.getElementById("q5").value);
+
+  fetch(GOOGLE_FORM_ACTION,{
+    method:"POST",
+    mode:"no-cors",
+    body:data
+  });
+}
+
+// ===== CLICK BẮN TIM =====
+document.addEventListener("click",(e)=>{
+  shootHeart(e.clientX,e.clientY);
+});
 </script>
 
 </body>
