@@ -202,6 +202,14 @@ setInterval(()=>{
 
 <script>
 function catTalk(text){
+  let currentBubble = null;
+
+function catTalk(text){
+  // nếu đã có bubble thì xóa cái cũ
+  if(currentBubble){
+    currentBubble.remove();
+  }
+
   let bubble = document.createElement("div");
   bubble.innerText = text;
   bubble.style.position = "fixed";
@@ -212,11 +220,17 @@ function catTalk(text){
   bubble.style.color = "#ff69b4";
   bubble.style.padding = "10px 15px";
   bubble.style.borderRadius = "20px";
-  bubble.style.fontSize = "14px";
   bubble.style.boxShadow = "0 0 10px pink";
-  document.body.appendChild(bubble);
 
-  setTimeout(()=>bubble.remove(),2000);
+  document.body.appendChild(bubble);
+  currentBubble = bubble;
+
+  setTimeout(()=>{
+    if(bubble === currentBubble){
+      bubble.remove();
+      currentBubble = null;
+    }
+  },2000);
 }
 function next(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
