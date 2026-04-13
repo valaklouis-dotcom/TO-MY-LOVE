@@ -9,6 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Quicksand:wght@400;600&family=Pacifico&display=swap" rel="stylesheet">
 
 <style>
+
 body {
   margin: 0;
   font-family: 'Quicksand', sans-serif;
@@ -63,6 +64,13 @@ input {
 .cat {
   width: 150px;
   margin-top: 20px;
+  cursor: pointer;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-10px);}
 }
 
 /* cupid */
@@ -122,13 +130,14 @@ setInterval(()=>{
 <div class="page active" id="p1">
   <h1>💖 Chào người em yêu ạ! 💖</h1>
   <p>Nhấn vào đây để tâm sự nhá Bae iu ơi!</p>
-  <img class="cat" src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif">
+  <img class="cat" onclick="catTalk('Bấm vào đi màaa 😚')" src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif">
   <br>
   <button onclick="next('p2')">💘 Bắt đầu 💘</button>
 </div>
 
 <!-- PAGE 2 -->
 <div class="page" id="p2">
+  <img class="cat" onclick="catTalk('Trả lời cho đàng hoàng nha 😏')" src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif">
   <h1>Anh có thương em không?</h1>
   <button onclick="next('p3')">Anh có 💖</button>
   <button onclick="next('p3')">Nào dám trả lời không 😏</button>
@@ -136,13 +145,14 @@ setInterval(()=>{
 
 <!-- PAGE 3 -->
 <div class="page" id="p3">
-  <img class="cat" src="https://media.giphy.com/media/mlvseq9yvZhba/giphy.gif">
+  <img class="cat" onclick="catTalk('Em cũng thương anh lắm 💖')" src="https://media.giphy.com/media/mlvseq9yvZhba/giphy.gif">
   <h1>Em cũng thương anh lắm 💖</h1>
   <button onclick="next('p4')">Tiếp tục ➡️</button>
 </div>
 
 <!-- PAGE 4 -->
 <div class="page" id="p4">
+  <img class="cat" onclick="catTalk('Viết thành thật nhaaa 💕')" src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif">
   <h1>Dạo này anh thấy thế nào ạ?</h1>
   <input id="q1">
   <br><button onclick="next('p5')">➡️</button>
@@ -150,6 +160,7 @@ setInterval(()=>{
 
 <!-- PAGE 5 -->
 <div class="page" id="p5">
+  <img class="cat" onclick="catTalk('Chắc lại ăn nhiều lắm nè 😆')" src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif">
   <h1>Món ăn nào mà anh thích ăn nhất?</h1>
   <input id="q2">
   <br><button onclick="next('p6')">➡️</button>
@@ -157,6 +168,7 @@ setInterval(()=>{
 
 <!-- PAGE 6 -->
 <div class="page" id="p6">
+  <img class="cat" onclick="catTalk('Nghĩ kỹ rồi trả lời nha 😏')" src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif">
   <h1>Bây giờ anh muốn làm gì nhất?</h1>
   <input id="q3">
   <br><button onclick="next('p7')">➡️</button>
@@ -164,6 +176,7 @@ setInterval(()=>{
 
 <!-- PAGE 7 -->
 <div class="page" id="p7">
+  <img class="cat" onclick="catTalk('Nói thật nhaaa 😤')" src="https://media.giphy.com/media/mlvseq9yvZhba/giphy.gif">
   <h1>Có món quà nào mà anh thích được tặng nhất hong ạ?</h1>
   <input id="q4">
   <br><button onclick="next('p8')">➡️</button>
@@ -171,6 +184,7 @@ setInterval(()=>{
 
 <!-- PAGE 8 -->
 <div class="page" id="p8">
+  <img class="cat" onclick="catTalk('Nói nhẹ nhàng thôi nha 😢')" src="https://media.giphy.com/media/ICOgUNjpvO0PC/giphy.gif">
   <h1>Điều gì ở em khiến anh còn phiền lòng nhất?</h1>
   <input id="q5">
   <br><button onclick="sendAllData(); next('p9')">💌 Gửi nè</button>
@@ -180,16 +194,42 @@ setInterval(()=>{
 <div class="page" id="p9">
   <h1>💖 Em đã ghi nhận rồi 💖</h1>
   <p>I love you 💘</p>
-  <img class="cat" src="https://media.giphy.com/media/ICOgUNjpvO0PC/giphy.gif">
+ <img class="cat" onclick="catTalk('Yêuuuu 😚💘')" src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif">
 
   <br><br>
   <button onclick="next('p1')">🔄 Làm lại từ đầu</button>
 </div>
 
 <script>
+function catTalk(text){
+  let bubble = document.createElement("div");
+  bubble.innerText = text;
+  bubble.style.position = "fixed";
+  bubble.style.bottom = "120px";
+  bubble.style.left = "50%";
+  bubble.style.transform = "translateX(-50%)";
+  bubble.style.background = "white";
+  bubble.style.color = "#ff69b4";
+  bubble.style.padding = "10px 15px";
+  bubble.style.borderRadius = "20px";
+  bubble.style.fontSize = "14px";
+  bubble.style.boxShadow = "0 0 10px pink";
+  document.body.appendChild(bubble);
+
+  setTimeout(()=>bubble.remove(),2000);
+}
 function next(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
+
+  if(id==="p2") catTalk("Anh phải trả lời thật đó nha 😏");
+  if(id==="p3") catTalk("Hehe biết mà 😚");
+  if(id==="p4") catTalk("Viết cho dễ thương nha 💖");
+  if(id==="p5") catTalk("Ăn gì ngon nhớ chia nha 😆");
+  if(id==="p6") catTalk("Đang nghĩ gì đó 😏");
+  if(id==="p7") catTalk("Quà gì đây ta 🎁");
+  if(id==="p8") catTalk("Câu này quan trọng đó 😢");
+  if(id==="p9") catTalk("Yêu anh nhiều lắm 💘");
 }
 
 const GOOGLE_FORM_ACTION="https://docs.google.com/forms/d/e/1FAIpQLSdYuCVEM7QCvCqjvtUc6SuVrNW1flerqN3PaKQ4poPHXj2uIA/formResponse";
