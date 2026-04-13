@@ -194,7 +194,7 @@ setInterval(()=>{
 
 <!-- PAGE 9 -->
 <div class="page" id="p9">
-  <h1>💖 Em đã ghi nhận rồi 💖</h1>
+  <h1>💖 Em đã ghi nhận những câu trả lời của anh, anh làm tốt lắm! Nhưng mà, chắc chắn anh cũng còn nhiều phiền lòng về em, em sẽ cố gắng thay đổi và trở nên tốt hơn. Hi vọng hai đứa sẽ cùng nhau tiến về phía trước, cùng nhau san sẻ và cùng nhau về nhà, cùng nhau ăn cơm và cùng nhau gánh vác nha! 💖</h1>
   <p>I love you 💘</p>
  <img class="cat" onclick="catTalk('Yêuuuu 😚💘')" src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif">
 
@@ -203,54 +203,107 @@ setInterval(()=>{
 </div>
 
 <script>
-// ===== NEXT PAGE =====
+
+// ===== CHUYỂN TRANG =====
 function next(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   let page = document.getElementById(id);
   if(page) page.classList.add('active');
 
   setTimeout(()=>{
-    if(id==="p2") catTalk("Anh phải trả lời thật đó nha 😏");
-    if(id==="p3") catTalk("Hehe biết mà 😚");
-    if(id==="p4") catTalk("Viết dễ thương nha 💖");
-    if(id==="p5") catTalk("Ăn gì ngon nhớ chia nha 😆");
-    if(id==="p6") catTalk("Đang nghĩ gì đó 😏");
-    if(id==="p7") catTalk("Quà gì đây ta 🎁");
-    if(id==="p8") catTalk("Câu này quan trọng đó 😢");
-    if(id==="p9") catTalk("Yêu anh nhiều lắm 💘");
+    if(id==="p2"){ catTalk("Anh phải trả lời thật đó nha 😏"); dogTalk("Trả lời nhanh lên 😤"); }
+    if(id==="p3"){ catTalk("Hehe biết mà 😚"); }
+    if(id==="p4"){ catTalk("Viết dễ thương nha 💖"); }
+    if(id==="p5"){ dogTalk("Ăn gì nhớ chia nha 😆"); }
+    if(id==="p6"){ catTalk("Đang nghĩ gì đó 😏"); }
+    if(id==="p7"){ dogTalk("Quà gì đây ta 🎁"); }
+    if(id==="p8"){ catTalk("Câu này quan trọng đó 😢"); dogTalk("Nói nhẹ thôi nha 😭"); }
+    if(id==="p9"){ catTalk("Yêu anh nhiều lắm 💘"); dogTalk("Gâu gâu yêu luôn 🐶"); }
   },100);
 }
 
 // ===== MÈO NÓI =====
-let currentBubble=null;
+let currentBubble = null;
 function catTalk(text){
   if(currentBubble) currentBubble.remove();
 
-  let bubble=document.createElement("div");
-  bubble.innerText=text;
+  let bubble = document.createElement("div");
+  bubble.innerText = text;
 
-  bubble.style.position="fixed";
-  bubble.style.bottom="120px";
-  bubble.style.left="50%";
-  bubble.style.transform="translateX(-50%)";
-  bubble.style.background="white";
-  bubble.style.color="#ff4da6";
-  bubble.style.padding="10px 15px";
-  bubble.style.borderRadius="20px";
-  bubble.style.boxShadow="0 0 10px pink";
+  bubble.style.position = "fixed";
+  bubble.style.bottom = "120px";
+  bubble.style.left = "50%";
+  bubble.style.transform = "translateX(-50%)";
+  bubble.style.background = "white";
+  bubble.style.color = "#ff4da6";
+  bubble.style.padding = "10px 15px";
+  bubble.style.borderRadius = "20px";
+  bubble.style.boxShadow = "0 0 10px pink";
+  bubble.style.zIndex = "9999";
 
   document.body.appendChild(bubble);
-  currentBubble=bubble;
+  currentBubble = bubble;
+
+  // click để tắt
+  bubble.onclick = ()=>{
+    bubble.remove();
+    currentBubble = null;
+  };
+
+  // tự mất sau 5s
+  setTimeout(()=>{
+    if(bubble===currentBubble){
+      bubble.remove();
+      currentBubble=null;
+    }
+  },5000);
+}
+
+// ===== CHÓ NÓI =====
+let currentDogBubble = null;
+function dogTalk(text){
+  if(currentDogBubble) currentDogBubble.remove();
+
+  let bubble = document.createElement("div");
+  bubble.innerText = text;
+
+  bubble.style.position = "fixed";
+  bubble.style.bottom = "200px";
+  bubble.style.left = "50%";
+  bubble.style.transform = "translateX(-50%)";
+  bubble.style.background = "#fff0f5";
+  bubble.style.color = "#ff69b4";
+  bubble.style.padding = "10px 15px";
+  bubble.style.borderRadius = "20px";
+  bubble.style.boxShadow = "0 0 10px pink";
+  bubble.style.zIndex = "9999";
+
+  document.body.appendChild(bubble);
+  currentDogBubble = bubble;
+
+  bubble.onclick = ()=>{
+    bubble.remove();
+    currentDogBubble = null;
+  };
+
+  setTimeout(()=>{
+    if(bubble===currentDogBubble){
+      bubble.remove();
+      currentDogBubble=null;
+    }
+  },5000);
+}
 
 // ===== BẮN TIM =====
 function shootHeart(x,y){
-  let heart=document.createElement("div");
-  heart.innerHTML=["💘","💖","💕"][Math.floor(Math.random()*3)];
+  let heart = document.createElement("div");
+  heart.innerHTML = ["💘","💖","💕","💝"][Math.floor(Math.random()*4)];
 
   heart.style.position="fixed";
   heart.style.left=x+"px";
   heart.style.top=y+"px";
-  heart.style.fontSize="20px";
+  heart.style.fontSize=(15+Math.random()*20)+"px";
+  heart.style.zIndex="999";
 
   document.body.appendChild(heart);
 
@@ -265,15 +318,21 @@ function shootHeart(x,y){
   },30);
 }
 
-// ===== CUPID =====
+// ===== CLICK BẮN TIM =====
+document.addEventListener("click",(e)=>{
+  shootHeart(e.clientX,e.clientY);
+});
+
+// ===== CUPID BAY =====
 function createCupid(){
   let cupid=document.createElement("img");
   cupid.src="https://cdn-icons-png.flaticon.com/512/833/833472.png";
 
   cupid.style.position="fixed";
-  cupid.style.width="50px";
+  cupid.style.width=(40+Math.random()*30)+"px";
   cupid.style.top=Math.random()*80+"vh";
   cupid.style.left="-60px";
+  cupid.style.zIndex="999";
 
   document.body.appendChild(cupid);
 
@@ -283,7 +342,7 @@ function createCupid(){
     let left=parseFloat(cupid.style.left);
     cupid.style.left=(left+speed)+"px";
 
-    if(Math.random()<0.1){
+    if(Math.random()<0.15){
       shootHeart(left, parseFloat(cupid.style.top));
     }
 
@@ -294,7 +353,21 @@ function createCupid(){
   },30);
 }
 
-setInterval(createCupid,1000);
+setInterval(createCupid,800);
+
+// ===== TIM RƠI =====
+setInterval(()=>{
+  let heart=document.createElement("div");
+  heart.innerHTML=["💖","💘","💕","💝"][Math.floor(Math.random()*4)];
+
+  heart.style.position="fixed";
+  heart.style.left=Math.random()*100+"vw";
+  heart.style.fontSize=(15+Math.random()*20)+"px";
+  heart.style.animation="fall "+(3+Math.random()*3)+"s linear";
+
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),6000);
+},120);
 
 // ===== GOOGLE FORM =====
 const GOOGLE_FORM_ACTION="https://docs.google.com/forms/d/e/1FAIpQLSdYuCVEM7QCvCqjvtUc6SuVrNW1flerqN3PaKQ4poPHXj2uIA/formResponse";
@@ -315,10 +388,6 @@ function sendAllData(){
   });
 }
 
-// ===== CLICK BẮN TIM =====
-document.addEventListener("click",(e)=>{
-  shootHeart(e.clientX,e.clientY);
-});
 </script>
 
 </body>
