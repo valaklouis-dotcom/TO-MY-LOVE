@@ -68,7 +68,12 @@ input {
   cursor: pointer;
   animation: bounce 2s infinite;
 }
-
+.dog {
+  width: 140px;
+  margin-top: 10px;
+  cursor: pointer;
+  animation: bounce 2s infinite;
+}
 @keyframes gradientMove {
   0%{background-position:0% 50%;}
   50%{background-position:100% 50%;}
@@ -103,6 +108,11 @@ input {
 @media (max-width: 600px) {
   h1 { font-size: 32px; }
 }
+
+@keyframes bounce {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
 </style>
 </head>
 
@@ -133,6 +143,7 @@ setInterval(()=>{
   <h1>💖 Chào người em yêu ạ! 💖</h1>
   <p>Nhấn vào đây để tâm sự nhá Bae iu ơi!</p>
   <img class="cat" onclick="catTalk('Bấm vào đi màaa 😚')" src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif">
+  <img class="dog" onclick="dogTalk('Anh bấm nhanh lên đi 😤')" src="https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif">
   <br>
   <button onclick="next('p2')">💘 Bắt đầu 💘</button>
 </div>
