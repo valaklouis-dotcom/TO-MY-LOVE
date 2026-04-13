@@ -242,14 +242,6 @@ function catTalk(text){
   document.body.appendChild(bubble);
   currentBubble=bubble;
 
-  setTimeout(()=>{
-    if(bubble===currentBubble){
-      bubble.remove();
-      currentBubble=null;
-    }
-  },2000);
-}
-
 // ===== BẮN TIM =====
 function shootHeart(x,y){
   let heart=document.createElement("div");
